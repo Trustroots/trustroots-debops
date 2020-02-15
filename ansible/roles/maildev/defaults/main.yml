@@ -1,0 +1,31 @@
+maildev__fqdn: 'maildev.dev2.trustroots.org'
+maildev__user: 'maildev'
+maildev__root_path: '/srv/www/sites/{{ maildev__fqdn }}'
+
+maildev__web_port: '8080'
+maildev__smtp_port: '1025'
+
+maildev__pki_realms:
+  - name: '{{ maildev__fqdn }}'
+    acme_default_subdomains: [ ]
+    acme: True
+
+maildev__nginx__dependent_servers:
+  - '{{ maildev__nginx_server }}'
+
+# for options see:
+# https://docs.debops.org/en/master/ansible/roles/nginx/defaults-detailed.html#nginx-servers
+maildev__nginx_server:
+  by_role: 'maildev'
+  enabled: True
+  type: 'proxy'
+  state: 'present'
+  name: '{{ maildev__fqdn }}'
+  pki_realm: '{{ maildev__fqdn }}'
+  root: False
+  webroot_create: False
+  proxy_pass: 'http://localhost:{{ maildev__web_port }}'
+  proxy_options: |
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;

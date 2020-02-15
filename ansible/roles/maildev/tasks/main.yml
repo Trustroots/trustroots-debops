@@ -1,0 +1,26 @@
+- name: 'create user'
+  user:
+    name: '{{ maildev__user }}'
+
+- name: install maildev
+  npm:
+    name: maildev
+    version: '1.1.0'
+    path: '{{ maildev__root_path }}'
+
+- name: maildev service
+  template:
+    src: maildev.service
+    dest: /etc/systemd/system/maildev.service
+  register: service
+
+- name: systemd daemon-reload
+  systemd:
+    daemon_reload: yes
+  when: service.changed
+
+- name: start/enable maildev
+  systemd:
+    name: maildev.service
+    state: started
+    enabled: yes

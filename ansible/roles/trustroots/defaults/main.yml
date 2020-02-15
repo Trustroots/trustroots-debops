@@ -15,6 +15,7 @@ trustroots__keyring__dependent_apt_keys:
 
 trustroots__packages:
   - 'mongodb-org'
+  - 'graphicsmagick'
   - 'build-essential' # only needed if we deploy via git
 
 trustroots__port: '3000'

@@ -19,3 +19,10 @@ ansistrano_get_url: 'http://nicksellen.co.uk/upld/trustroots.tgz'
 ansistrano_keep_releases: 3
 ansistrano_after_update_code_tasks_file: 'deploy-hooks/after-update-code.yml'
 ansistrano_after_symlink_tasks_file: 'deploy-hooks/after-symlink.yml'
+
+ansistrano_shared_paths:
+  - 'tmp'
+  - 'public/uploads-profile'
+
+ansistrano_shared_files:
+ - 'config/env/local.js'

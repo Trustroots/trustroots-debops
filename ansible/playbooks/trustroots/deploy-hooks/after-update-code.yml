@@ -13,3 +13,13 @@
     cmd: npm run build
     chdir: '{{ ansistrano_release_path.stdout }}'
   when: 'ansistrano_deploy_via == "git"'
+
+- name: make shared dirs owned by user
+  file:
+    state: directory
+    owner: '{{ trustroots__user }}'
+    path: '{{ item }}'
+    mode: '755'
+  loop:
+    - '{{ ansistrano_shared_path }}/tmp'
+    - '{{ ansistrano_shared_path }}/public/uploads-profile'

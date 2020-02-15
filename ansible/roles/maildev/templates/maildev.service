@@ -1,0 +1,13 @@
+[Unit]
+Description=Trustroots server
+After=network.target
+
+[Service]
+Environment=NODE_ENV=production
+Type=simple
+User={{ maildev__user }}
+ExecStart={{ maildev__root_path }}/node_modules/.bin/maildev --web {{ maildev__web_port }} --smtp {{ maildev__smtp_port }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

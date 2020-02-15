@@ -11,12 +11,15 @@
   hosts: [ 'trustroots' ]
   become: True
   roles:
+    - role: pki
+      pki_dependent_realms:
+        - '{{ maildev__pki_realms }}'
     - role: keyring
       keyring__dependent_apt_keys:
         - '{{ trustroots__keyring__dependent_apt_keys }}'
     - role: nginx
-      nginx__dependent_upstreams:
-        - '{{ trustroots__nginx__dependent_upstreams }}'
       nginx__dependent_servers:
         - '{{ trustroots__nginx__dependent_servers }}'
+        - '{{ maildev__nginx__dependent_servers }}'
     - role: trustroots
+    - role: maildev
