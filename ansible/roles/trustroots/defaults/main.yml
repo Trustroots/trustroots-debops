@@ -1,0 +1,45 @@
+trustroots__fqdn: 'dev2.trustroots.org'
+
+trustroots__user: 'trustroots'
+
+trustroots__root_path: '/srv/www/sites/{{ trustroots__fqdn }}'
+trustroots__current_root_path: '{{ trustroots__root_path }}/current'
+
+trustroots__git_repo: 'https://github.com/Trustroots/trustroots.git'
+trustroots__git_ref: 'production'
+
+trustroots__keyring__dependent_apt_keys:
+  - id: 'E162F504A20CDF15827F718D4B7C549A058F8B6B'
+    repo: 'deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main'
+    state: 'present'
+
+trustroots__packages:
+  - 'mongodb-org'
+  - 'build-essential' # only needed if we deploy via git
+
+trustroots__port: '3000'
+
+trustroots__nginx__dependent_servers:
+  - '{{ trustoots__nginx_server }}'
+
+# for options see:
+# https://docs.debops.org/en/master/ansible/roles/nginx/defaults-detailed.html#nginx-servers
+trustoots__nginx_server:
+  by_role: 'trustroots'
+  enabled: True
+  type: 'proxy'
+  state: 'present'
+  name: '{{ trustroots__fqdn }}'
+  root: '{{ trustroots__current_root_path }}/public'
+  webroot_create: False
+  location:
+    '/': |
+      try_files $uri @trustroots;
+
+    '@trustroots': |
+      proxy_set_header Host              $host;
+      proxy_set_header X-Real-IP         $remote_addr;
+      proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Forwarded-Port  443;
+      proxy_pass http://localhost:{{ trustroots__port }};

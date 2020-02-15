@@ -1,0 +1,30 @@
+- name: 'create user'
+  user:
+    name: '{{ trustroots__user }}'
+
+- name: install packages
+  package:
+    name: '{{ trustroots__packages }}'
+
+- name: trustroots server service
+  template:
+    src: trustroots-server.service
+    dest: /etc/systemd/system/trustroots-server.service
+  register: service_server
+
+- name: trustroots worker service
+  template:
+    src: trustroots-worker.service
+    dest: /etc/systemd/system/trustroots-worker.service
+  register: service_worker
+
+- name: systemd daemon-reload
+  systemd:
+    daemon_reload: yes
+  when: service_server.changed or service_worker.changed
+
+- name: start/enable mongodb
+  systemd:
+    name: mongod.service
+    state: started
+    enabled: yes

@@ -1,0 +1,4 @@
+
+# Uncomment the lines below to encrypt your secrets with git-crypt
+#ansible/secret/** filter=git-crypt diff=git-crypt
+#secret/** filter=git-crypt diff=git-crypt

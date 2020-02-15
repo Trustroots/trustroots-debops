@@ -1,0 +1,11 @@
+- name: start/enable trustroots server
+  systemd:
+    name: trustroots-server.service
+    state: restarted
+    enabled: yes
+
+- name: start/enable trustroots worker
+  systemd:
+    name: trustroots-worker.service
+    state: restarted
+    enabled: yes

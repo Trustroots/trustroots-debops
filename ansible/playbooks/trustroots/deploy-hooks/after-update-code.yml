@@ -1,0 +1,15 @@
+- name: install npm dependencies
+  command:
+    # for some reason this is only working with sudo :/
+    cmd: sudo npm ci
+    chdir: '{{ ansistrano_release_path.stdout }}'
+  # npm:
+  #   ci: yes
+  #   path: '{{ ansistrano_release_path.stdout }}'
+  when: 'ansistrano_deploy_via == "git"'
+
+- name: build client
+  command:
+    cmd: npm run build
+    chdir: '{{ ansistrano_release_path.stdout }}'
+  when: 'ansistrano_deploy_via == "git"'

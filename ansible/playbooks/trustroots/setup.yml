@@ -1,0 +1,22 @@
+---
+
+- name: setup trustroots
+
+  collections: [ 'debops.debops', 'debops.roles01',
+                 'debops.roles02', 'debops.roles03' ]
+  environment: '{{ inventory__environment | d({})
+                   | combine(inventory__group_environment | d({}))
+                   | combine(inventory__host_environment  | d({})) }}'
+
+  hosts: [ 'trustroots' ]
+  become: True
+  roles:
+    - role: keyring
+      keyring__dependent_apt_keys:
+        - '{{ trustroots__keyring__dependent_apt_keys }}'
+    - role: nginx
+      nginx__dependent_upstreams:
+        - '{{ trustroots__nginx__dependent_upstreams }}'
+      nginx__dependent_servers:
+        - '{{ trustroots__nginx__dependent_servers }}'
+    - role: trustroots

@@ -1,0 +1,15 @@
+---
+
+- name: deploy trustroots
+  hosts: [ 'trustroots' ]
+  become: True
+  roles:
+    # hmm I need this here to get the vars
+    # but I don't want to run the tasks
+    # I suspect there is another way
+    # maybe I need to put my vars in group_vars...
+    - role: trustroots
+      tags:
+        # this feels like kind of a hack...
+        - never
+    - role: ansistrano.deploy

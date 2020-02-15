@@ -1,0 +1,21 @@
+---
+ansistrano_deploy_to: '{{ trustroots__root_path }}'
+
+# my random version I put on my website
+# but it could come from a build artifact / github release
+ansistrano_deploy_via: 'download_unarchive'
+ansistrano_get_url: 'http://nicksellen.co.uk/upld/trustroots.tgz'
+
+# local file
+#ansistrano_deploy_via: 'copy_unarchive'
+#ansistrano_deploy_from: 'trustroots.tgz'
+
+# build from git repo
+# requires enough memory for webpack build, which is a lot
+# ansistrano_deploy_via: git
+# ansistrano_git_repo: https://github.com/Trustroots/trustroots.git
+# ansistrano_git_branch: master
+
+ansistrano_keep_releases: 3
+ansistrano_after_update_code_tasks_file: 'deploy-hooks/after-update-code.yml'
+ansistrano_after_symlink_tasks_file: 'deploy-hooks/after-symlink.yml'

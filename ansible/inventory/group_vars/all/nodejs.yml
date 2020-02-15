@@ -1,0 +1,3 @@
+---
+nodejs__node_upstream: 'yes'
+nodejs__node_upstream_release: 'node_12.x'
