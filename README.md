@@ -18,14 +18,17 @@ pip install -r requirements.txt
 
 # install ansible galaxy dependencies
 ansible-galaxy install -r galaxy-requirements.yml
----
+```
 
 ## initializing server
 
----
+```
 # bootstrap the server ready for being used
-# (depending on the server you may need `-k` or `-K` arguments, or a different `-u root` user, or none...)
-debops bootstrap -l dev2 -u root
+# you will probably need to use some combination of the following arguments in addition:
+#   -u root # use root account
+#   -k      # ask for password
+#   -K      # ask for sudo password
+debops bootstrap -l dev2
 
 # setup the main system things
 debops -l dev2
@@ -34,5 +37,5 @@ debops -l dev2
 debops trustroots/setup -l dev2
 
 # deploy the site
-debops trustoorts/deploy -l dev2
+debops trustroots/deploy -l dev2
 ```
