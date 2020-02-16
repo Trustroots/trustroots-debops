@@ -39,3 +39,15 @@ debops trustroots/setup -l dev2
 # deploy the site
 debops trustroots/deploy -l dev2
 ```
+
+## TODO
+
+- [ ] allow deploys from unpriviledged user (trustroots/setup can create an account with sudo privs for restarting service)
+- [ ] fixup letsencrypt quirks (probably need chatting with debops people incase I did something wrong, or switch to standard letsencrypt/certbot kind of setup instead of this pki module)
+- [ ] work out a good approach to have seperate environments (dev, prod, etc)
+- [ ] ideally be able to split up the secrets so people can be given access to just one environment
+- [ ] document how to re-encrypt encfs keys to add more gpg users
+- [ ] make it possible to deploy multiple versions of the site on one server (needs clearer idea on how the options work)
+- [ ] set/use/save mongodb users/passwords
+- [ ] add additional optional services
+  - [ ] influxdb
