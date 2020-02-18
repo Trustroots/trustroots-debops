@@ -50,4 +50,4 @@ debops trustroots/deploy -l dev2
 - [ ] make it possible to deploy multiple versions of the site on one server (needs clearer idea on how the options work)
 - [ ] set/use/save mongodb users/passwords
 - [ ] add additional optional services
-  - [ ] influxdb
+  - [ ] influxdb (see https://github.com/debops/debops/pull/1149)
