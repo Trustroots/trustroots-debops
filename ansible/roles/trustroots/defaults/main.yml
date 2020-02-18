@@ -1,12 +1,12 @@
-trustroots__fqdn: 'dev2.trustroots.org'
+trustroots__fqdn: 'dev2.trustroots.org'  # TODO: make configurable
 
-trustroots__user: 'trustroots'
+trustroots__user: 'trustroots'  # TODO: make configurable
 
 trustroots__root_path: '/srv/www/sites/{{ trustroots__fqdn }}'
 trustroots__current_root_path: '{{ trustroots__root_path }}/current'
 
-trustroots__git_repo: 'https://github.com/Trustroots/trustroots.git'
-trustroots__git_ref: 'production'
+# trustroots__git_repo: 'https://github.com/Trustroots/trustroots.git'
+# trustroots__git_ref: 'production'  # TODO: make configurable
 
 trustroots__keyring__dependent_apt_keys:
   - id: 'E162F504A20CDF15827F718D4B7C549A058F8B6B'
@@ -16,9 +16,14 @@ trustroots__keyring__dependent_apt_keys:
 trustroots__packages:
   - 'mongodb-org'
   - 'graphicsmagick'
-  - 'build-essential' # only needed if we deploy via git
+  #- 'build-essential' # only needed if we deploy via git
 
-trustroots__port: '3000'
+trustroots__pki_realms:
+  - name: '{{ trustroots__fqdn }}'
+    acme_default_subdomains: [ ]
+    acme: True
+
+trustroots__port: '3000' # TODO: make configurable
 
 trustroots__nginx__dependent_servers:
   - '{{ trustoots__nginx_server }}'
@@ -31,6 +36,7 @@ trustoots__nginx_server:
   type: 'proxy'
   state: 'present'
   name: '{{ trustroots__fqdn }}'
+  pki_realm: '{{ trustroots__fqdn }}'
   root: '{{ trustroots__current_root_path }}/public'
   webroot_create: False
   location:

@@ -11,15 +11,48 @@
   hosts: [ 'trustroots' ]
   become: True
   roles:
+    - role: keyring
+      tags: [ 'role::keyring', 'skip::keyring', 'skip::trustroots',
+              'role::nodejs', 'role::nginx', 'role::trustroots' ]
+      keyring__dependent_apt_keys:
+        - '{{ nodejs__keyring__dependent_apt_keys }}'
+        - '{{ nginx__keyring__dependent_apt_keys }}' 
+        - '{{ trustroots__keyring__dependent_apt_keys }}'
+
     - role: pki
       pki_dependent_realms:
+        - '{{ trustroots__pki_realms }}'
         - '{{ maildev__pki_realms }}'
-    - role: keyring
-      keyring__dependent_apt_keys:
-        - '{{ trustroots__keyring__dependent_apt_keys }}'
+
+    - role: apt_preferences
+      tags: [ 'role::apt_preferences', 'skip::apt_preferences' ]
+      apt_preferences__dependent_list:
+        - '{{ nginx__apt_preferences__dependent_list }}'
+        - '{{ nodejs__apt_preferences__dependent_list }}'
+
+    - role: nodejs
+      tags: [ 'role::nodejs', 'skip::nodejs' ]
+
+    - role: ferm
+      tags: [ 'role::ferm', 'skip::ferm' ]
+      ferm__dependent_rules:
+        - '{{ nginx__ferm__dependent_rules }}'
+
+    - role: python
+      tags: [ 'role::python', 'skip::python', 'role::mariadb', 'role::postgresql' ]
+      python__dependent_packages3:
+        - '{{ nginx__python__dependent_packages3 }}'
+      python__dependent_packages2:
+        - '{{ nginx__python__dependent_packages2 }}'
+
     - role: nginx
+      tags: [ 'role::nginx', 'skip::nginx' ]
       nginx__dependent_servers:
         - '{{ trustroots__nginx__dependent_servers }}'
         - '{{ maildev__nginx__dependent_servers }}'
+
     - role: trustroots
+      tags: [ 'role::trustroots', 'skip::trustroots' ]
+
     - role: maildev
+      tags: [ 'role::maildev', 'skip::maildev' ]

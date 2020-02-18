@@ -5,11 +5,11 @@
 #     # acme_default_subdomains: []
 #     # acme_domains: []
 
-
-pki_realms:
-  - name: '{{ ansible_fqdn }}'
-    acme_default_subdomains: [ ]
-    acme: True
+# moved to trustroots__pki_realms and the dependent stuff
+# pki_realms:
+#   - name: '{{ ansible_fqdn }}'
+#     acme_default_subdomains: [ ]
+#     acme: True
     #acme_ca: 'le-staging'
 
 
@@ -17,7 +17,7 @@ pki_realms:
 # well, it created it, but it still had an acme/error.log damn I should have looked at the error
 # but after I removed it and re-ran the command it was ok... but not so satifying.
 # I think at this point I need to put it public and ask the people.
-pki_create_acme_challenge_dir: True
+#pki_create_acme_challenge_dir: True
 
 # or maybe this is enough, but it should have been true anyway, but maybe we didn't load that in somehow...
 # but still, this only sets the fact "ansible_local.nginx.acme" which we check at another point to see if

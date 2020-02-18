@@ -8,7 +8,7 @@ system_users__self: False
 system_users__accounts:
   - name: 'nick'
     group: 'nick'
-    shell: 'bash'
+    shell: '/usr/bin/bash'
     admin: True
     sshkeys: |
       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOpgeDCFf/6VbioHB6Fe6MYFmw/gJqZG/orscecGtwtl Nick Sellen <hello@nicksellen.co.uk> 2019-12-01
