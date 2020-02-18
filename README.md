@@ -38,6 +38,9 @@ debops trustroots/setup -l dev2
 
 # deploy the site
 debops trustroots/deploy -l dev2
+
+# ... or, all in one go
+debops site trustroots/setup trustroots/deploy -l dev2
 ```
 
 ## TODO
