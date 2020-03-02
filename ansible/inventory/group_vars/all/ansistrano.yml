@@ -1,10 +1,10 @@
 ---
 ansistrano_deploy_to: '{{ trustroots__root_path }}'
 
-# my random version I put on my website
-# but it could come from a build artifact / github release
+# gets the latest build uploaded via travis deployment
+# see https://github.com/Trustroots/trustroots/blob/master/.travis.yml
 ansistrano_deploy_via: 'download_unarchive'
-ansistrano_get_url: 'http://nicksellen.co.uk/upld/trustroots.tar.gz'
+ansistrano_get_url: 'https://trustroots-builds.fra1.digitaloceanspaces.com/trustroots.tar.gz'
 
 # local file
 #ansistrano_deploy_via: 'copy_unarchive'
