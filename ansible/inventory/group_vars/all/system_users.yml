@@ -13,3 +13,11 @@ system_users__accounts:
     sshkeys: |
       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOpgeDCFf/6VbioHB6Fe6MYFmw/gJqZG/orscecGtwtl Nick Sellen <hello@nicksellen.co.uk> 2019-12-01
     state: 'present'
+  - name: 'deploy'
+    group: 'deploy'
+    shell: '/usr/bin/bash'
+    # ideally this should have restricted permissions to only deploy the site...
+    admin: True
+    sshkeys: |
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIBmr5aOebmFdiC4nLwWUNwT/4Yvxv4xNY+jCmeMvWWA Trustroots Deploy <support@trustroots.org> 2020-03-02
+    state: 'present'
