@@ -15,4 +15,4 @@ COPY . /work
 WORKDIR /work
 
 RUN pip install -r requirements.txt && \
-    ansible-galaxy install -r galaxy-requirements.yml
+    ansible-galaxy install --roles-path roles -r galaxy-requirements.yml
