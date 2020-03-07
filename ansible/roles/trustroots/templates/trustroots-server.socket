@@ -1,0 +1,9 @@
+[Unit]
+Description=Trustroots server socket
+
+[Socket]
+ListenStream=/run/trustroots-server.socket
+Service=trustroots-server@1.service
+
+[Install]
+WantedBy=sockets.target

@@ -23,22 +23,40 @@
     # this corresponds to ansistrano_shared_files config elsewhere
     dest: '{{ trustroots__root_path }}/shared/config/env/local.js'
 
-- name: trustroots server service
+- name: trustroots server socket
   template:
-    src: trustroots-server.service
-    dest: /etc/systemd/system/trustroots-server.service
+    src: trustroots-server.socket
+    dest: /etc/systemd/system/trustroots-server.socket
+  register: socket_server
+
+- name: trustroots server service template
+  template:
+    src: trustroots-server@.service
+    dest: /etc/systemd/system/trustroots-server@.service
   register: service_server
 
-- name: trustroots worker service
+- name: trustroots server service instance
+  file:
+    src: /etc/systemd/system/trustroots-server@.service
+    dest: /etc/systemd/system/trustroots-server@1.service
+    state: link
+
+- name: trustroots worker service template
   template:
-    src: trustroots-worker.service
-    dest: /etc/systemd/system/trustroots-worker.service
+    src: trustroots-worker@.service
+    dest: /etc/systemd/system/trustroots-worker@.service
   register: service_worker
+
+- name: trustroots worker service instance
+  file:
+    src: /etc/systemd/system/trustroots-worker@.service
+    dest: /etc/systemd/system/trustroots-worker@1.service
+    state: link
 
 - name: systemd daemon-reload
   systemd:
     daemon_reload: yes
-  when: service_server.changed or service_worker.changed
+  when: socket_server.changed or service_server.changed or service_worker.changed
 
 - name: start/enable mongodb
   systemd:

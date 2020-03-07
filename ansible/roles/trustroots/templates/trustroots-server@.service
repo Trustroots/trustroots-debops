@@ -1,10 +1,11 @@
 [Unit]
-Description=Trustroots server
+Description=Trustroots server %i
 After=network.target
 
 [Service]
 Environment=NODE_ENV=production
 Type=simple
+Sockets=trustroots-server.socket
 User={{ trustroots__user }}
 WorkingDirectory={{ trustroots__current_root_path }}
 ExecStart=/usr/bin/node server.js

@@ -23,8 +23,6 @@ trustroots__pki_realms:
     acme_default_subdomains: [ ]
     acme: True
 
-trustroots__port: '3000' # TODO: make configurable
-
 trustroots__nginx__dependent_servers:
   - '{{ trustoots__nginx_server }}'
 
@@ -49,4 +47,4 @@ trustoots__nginx_server:
       proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
       proxy_set_header X-Forwarded-Proto $scheme;
       proxy_set_header X-Forwarded-Port  443;
-      proxy_pass http://localhost:{{ trustroots__port }};
+      proxy_pass http://unix:/run/trustroots-server.socket;

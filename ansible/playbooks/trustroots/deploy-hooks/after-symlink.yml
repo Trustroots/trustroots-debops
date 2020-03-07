@@ -1,11 +1,17 @@
+- name: start/enable trustroots socket
+  systemd:
+    name: trustroots-server.socket
+    state: started
+    enabled: yes
+
 - name: start/enable trustroots server
   systemd:
-    name: trustroots-server.service
+    name: trustroots-server@1.service
     state: restarted
     enabled: yes
 
 - name: start/enable trustroots worker
   systemd:
-    name: trustroots-worker.service
+    name: trustroots-worker@1.service
     state: restarted
     enabled: yes

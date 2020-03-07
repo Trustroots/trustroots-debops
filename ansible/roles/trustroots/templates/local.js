@@ -1,5 +1,6 @@
 module.exports = {
   https: true,
+  fd: 3, // for systemd socket activation
   domain: '{{ trustroots__fqdn }}',
   mailer: {
     from: 'trustroots@localhost',
