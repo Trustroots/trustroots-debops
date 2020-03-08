@@ -11,6 +11,8 @@
   hosts: [ 'trustroots' ]
   become: True
   roles:
+    - role: secret
+
     - role: keyring
       tags: [ 'role::keyring', 'skip::keyring', 'skip::trustroots',
               'role::nodejs', 'role::nginx', 'role::trustroots' ]

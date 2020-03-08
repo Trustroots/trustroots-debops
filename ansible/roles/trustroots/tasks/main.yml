@@ -19,7 +19,7 @@
 
 - name: trustroots local config
   template:
-    src: local.js
+    src: '{{ secret + "/trustroots/local.js" }}'
     # this corresponds to ansistrano_shared_files config elsewhere
     dest: '{{ trustroots__root_path }}/shared/config/env/local.js'
 
