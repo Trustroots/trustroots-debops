@@ -63,3 +63,15 @@
     name: mongod.service
     state: started
     enabled: yes
+
+# when https://github.com/debops/debops/pull/1282 is merged it would allow much
+# more sophisticated influxdb setup, so for now I keep this very simple default installation
+- name: start/enable influxdb
+  systemd:
+    name: influxdb.service
+    state: started
+    enabled: yes
+
+- name: create influxdb database
+  influxdb_database:
+    database_name: '{{ trustroots__influxdb_database }}'
