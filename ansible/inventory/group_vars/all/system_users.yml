@@ -13,6 +13,18 @@ system_users__accounts:
     sshkeys: |
       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOpgeDCFf/6VbioHB6Fe6MYFmw/gJqZG/orscecGtwtl Nick Sellen <hello@nicksellen.co.uk> 2019-12-01
     state: 'present'
+  - name: 'simison'
+    group: 'simison'
+    shell: '/usr/bin/bash'
+    admin: True
+    sshkeys: |
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDI+RW3WFYac5BmobPf5117RYoifAJEcnCR7j2emVUJ1qFnbtbx9CzEDjFOd2R8fZbDTqEwNuojzrnEay/hW6ep6fyGFvYLbLnmQioo9QUfKchyjuOwElfFvLgzSffFuhPu9+Nb2A+8bgK7MI8IxEMBUFG4/XbmBLnlE9Y9UqY6visMdbXaeAy+31+vG+c2tAaNHtnMmDCEL7fIht0OyF5EAx6vZbSoOAJa4kYOUZ2YqKqCq5ZgUGrYTMguD4nMkHNwfMZr/CVoM1vrCh7xx/brzv/H+/aRpId2Dbbad9Jbag1rV4ge1QzWOlZUbJ+bgTJwHj/wpVNgmPNPTWy67NGX Mikael Korpela <mikael@ihminen.org>
+  - name: 'akronix'
+    group: 'akronix'
+    shell: '/usr/bin/bash'
+    admin: True
+    sshkeys: |
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAH6CWIbMwYnyX7U6X/ZSRCa0bgTY9Fr9hS810arbPwJE2n87bkzrZfVScfJ6/bk3U2jhPhYE7+2itV2k1IqSSRD59F/0zFW5+WX7leFdrDewh7H+cmYsLPAHOfZqHg92RnJuifxIVOsw7F1E4mPot+/1JoBDU97zCIf6Hi5S2eu05Bc83WXkobmsefgudzxsQnRe5dduwnBVDG8edXFiyY3Fvg370ncaVzxrPl3D2EPvwjzhM3cR7nbtWSf/3gEGXC7QUj6r1VM8MTfKtv7oPTg79Tb69E647nnY4S/RxdIBHl3CnX3TDYwXD6kM6cZxH5TgQJYB5ZDONPyVBEXqL akronix@ASJ-PORTEGE-Z30-C
   - name: 'deploy'
     group: 'deploy'
     shell: '/usr/bin/bash'
