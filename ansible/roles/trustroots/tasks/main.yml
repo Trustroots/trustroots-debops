@@ -23,6 +23,11 @@
     # this corresponds to ansistrano_shared_files config elsewhere
     dest: '{{ trustroots__root_path }}/shared/config/env/local.js'
 
+- name: override robots.txt content
+  template:
+    src: robots.override.txt
+    dest: '{{ trustroots__root_path }}/robots.override.txt'
+
 - name: trustroots server socket
   template:
     src: trustroots-server.socket

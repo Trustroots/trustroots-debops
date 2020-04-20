@@ -50,6 +50,12 @@ trustoots__nginx_server:
     '/': |
       try_files $uri @trustroots;
 
+    # we override it to tell robots not to crawl
+    # if we ever use this config for production deployment, then
+    # we would need to allow another option to not do this
+    '/robots.txt': |
+      alias {{ trustroots__root_path }}/robots.override.txt;
+
     '@trustroots': |
       proxy_set_header Host              $host;
       proxy_set_header X-Real-IP         $remote_addr;
